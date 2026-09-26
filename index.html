@@ -17,27 +17,22 @@
 
   .stran {
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 24px;
-    max-width: 1960px;
-    margin: 60px auto;
-    padding: 0 16px;
+    grid-template-columns: 320px 1fr;
+    max-width: 100vh;
   }
 
-  .levo, .desno {
-    background-color: white;
-    border-radius: 16px;
-    padding: 32px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
-  }
+.levo {
+  order: 1;
+  background-color: #1f2a27;
+  color: #e6ece9;
+  padding: 48px 32px;
+}
 
-  .levo {
-    order: 1;
-  }
-
-  .desno {
-    order: 2;
-  }
+.desno {
+  order: 2;
+  background-color: white;
+  padding: 64px;
+}
 
   h1 {
     font-size: 2.2rem;
@@ -59,22 +54,22 @@
   }
 
   .levo h2 {
-    margin-top: 0;
-  }
+  color: #8fb8aa;
+  margin-top: 0;
+}
+
+
+  
 
   h3 {
     font-size: 0.95rem;
     margin: 20px 0 8px;
   }
 
-  .znacke {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
+  .znacke li {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+  
 
   .znacke li {
     background-color: #e6efec;
@@ -83,6 +78,9 @@
     font-size: 0.85rem;
   }
 
+.desno p {
+  max-width: 60ch;
+}
   a {
     color: #2f6f5e;
     font-weight: 600;
@@ -93,28 +91,49 @@
     text-decoration: underline;
   }
 
-  @media (max-width: 700px) {
-    .stran {
-      grid-template-columns: 1fr;
-      margin: 24px auto;
-    }
-    .desno {
-      order: 1;
-    }
-    .levo {
-      order: 2;
-    }
+ @media (max-width: 700px) {
+  .stran {
+    grid-template-columns: 1fr;
   }
+  .desno {
+    order: 1;
+    padding: 32px 16px;
+  }
+  .levo {
+    order: 2;
+    padding: 32px 16px;
+  }
+}
+  .gumb {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 10px 20px;
+  border: 2px solid #2f6f5e;
+  border-radius: 10px;
+  color: #2f6f5e;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.gumb:hover {
+  background-color: #2f6f5e;
+  color: white;
+  text-decoration: none;
+}
+  
+
 </style>
 </head>
 <body>
   <div class="stran">
   <main class="levo">
   <h1>Valentin B</h1>
-    <p class="podnaslov"> Študent računalništva in informatike na VSŠ.</p>
+    
+	<p class="podnaslov"> Študent računalništva in informatike na VSŠ.</p>
     <p>V prostem času nadgrajujem svoj domači strežnik in rešujem težave, ki se pri tem pojavijo.</p> 
-
-    <aside class="levo">
+</main>
+    <aside class="desno">
     <h2>Projekti</h2>
       
       <h3>Programiranje</h3>
@@ -138,7 +157,7 @@
        <ul>
           <li>3D modeliranje fusion 360 (Dobro)</li>
         </ul>
-      <a href="slike.html">Poglej slike projektov </a>
-      
+      <a href="slike.html" class="gumb">Poglej slike projektov </a>
+      </div>
 </body>
 </html>
