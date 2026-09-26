@@ -4,28 +4,128 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Valentin</title>
-  <style>
-    body {
-      background-color: #e3ebe7;
-      font-family: sans-serif;
-      max-width: 700px;
-      margin: 40px auto;
-      padding: 0 16px;
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    background-color: #eef1f0;
+    font-family: "Inter", sans-serif;
+    color: #1f2328;
+    line-height: 1.6;
+  }
+
+  .stran {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 24px;
+    max-width: 960px;
+    margin: 60px auto;
+    padding: 0 16px;
+  }
+
+  .levo, .desno {
+    background-color: white;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .levo {
+    order: 1;
+  }
+
+  .desno {
+    order: 2;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+    margin: 0;
+  }
+
+  .podnaslov {
+    color: #2f6f5e;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+
+  h2 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #6b7280;
+    margin-top: 32px;
+  }
+
+  .levo h2 {
+    margin-top: 0;
+  }
+
+  h3 {
+    font-size: 0.95rem;
+    margin: 20px 0 8px;
+  }
+
+  .znacke {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .znacke li {
+    background-color: #e6efec;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+  }
+
+  a {
+    color: #2f6f5e;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 700px) {
+    .stran {
+      grid-template-columns: 1fr;
+      margin: 24px auto;
     }
-  </style>
+    .desno {
+      order: 1;
+    }
+    .levo {
+      order: 2;
+    }
+  }
+</style>
 </head>
 <body>
+  <div class="stran">
+  <main class="levo">
   <h1>Valentin B</h1>
-<p>Sem študent računalništva in informatike na VSŠ. V prostem času nadgrajujem svoj domači strežnik in rešujem težave, ki se pri tem pojavijo.</p> 
+    <p class="podnaslov"> Študent računalništva in informatike na VSŠ.</p>
+    <p>V prostem času nadgrajujem svoj domači strežnik in rešujem težave, ki se pri tem pojavijo.</p> 
+
+    <aside class="levo">
     <h2>Projekti</h2>
-      <a href="slike.html">Poglej slike projektov </a>
+      
       <h3>Programiranje</h3>
+      <ul class>="znacke"
       <ul>
       <li>SQL (osnove)</li>
       <li>C# (osnove)</li>
       </ul>
 
       <h4>Strežnik in omrežje</h4>
+        <ul class>="znacke"
       <ul>  
       <li>Linux (Dobro)</li>
         <li>Proxmox (Osnovno)</li>
@@ -34,9 +134,11 @@
       </ul>
 
       <h5>Ostalo</h5>
+          <ul class>="znacke"
        <ul>
           <li>3D modeliranje fusion 360 (Dobro)</li>
         </ul>
+      <a href="slike.html">Poglej slike projektov </a>
       
 </body>
 </html>
