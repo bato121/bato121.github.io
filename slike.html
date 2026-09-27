@@ -2,34 +2,119 @@
 <html lang="sl">
 <head>
   <meta charset="UTF-8">
-  <title>Slike projektov</title>
-  <style>
-    body {
-      background-color: #e3ebe7;
-      font-family: sans-serif;
-      max-width: 700px;
-      margin: 40px auto;
-      padding: 0 16px;
-    }
-    img {
-      max-width: 100%;
-      border-radius: 8px;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    background-color: white;
+    font-family: "Inter", sans-serif;
+    color: #111;
+    line-height: 1.6;
+  }
+
+.galerija {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 16px;
+}
+
+section {
+  margin-top: 56px;
+}
+
+.mreza {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.mreza img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+}
+
+.nazaj {
+  color: #666;
+  font-weight: 600;
+  text-decoration: none;
+  cursor:zoom-in;
+}
+.mreza img {
+  cursor: zoom-in;
+}
+
+#povecava {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  justify-content: center;
+  align-items: center;
+  cursor: zoom-out;
+  z-index: 10;
+}
+
+#povecava.odprto {
+  display: flex;
+}
+
+#povecava img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 8px;
+}
+</style>
 </head>
+<link rel="icon" href="ikona.svg" type="image/svg+xml">
 <body>
+<main class="galerija">
+<a href="index.html" class="nazaj"><- Nazaj</a>
+<h1>Projekt</h1>
+ <section id="streznik">
+      <h2>Domači strežnik</h2>
+      <p></p>
+      <div class="mreza">
+        <img src="slike/server.jpg" alt="Strežnik">
+        <img src="slike/server2.jpg" alt="pcie to mini sas">
+		<img src="slike/server3.jpg" alt="lto6 bralnik">
+		
+      </div>
+    </section>
 
-  <a href="index.html">← Nazaj</a>
+    <section id="dron">
+      <h2>Dron</h2>
+      <p></p>
+      <div class="mreza">
+        <img src="slike/dron1.jpg" alt="Sestavljen dron">
+        <img src="slike/dron2.jpg" >
+      </div>
+    </section>
+  </main>
+  <div id="povecava">
+  <img src="" alt="">
+</div>
 
-  <h1>Slike projektov</h1>
+<script>
+  const povecava = document.getElementById("povecava");
+  const velikaSlika = povecava.querySelector("img");
 
-  <h2>Dron</h2>
-  <img src="slike/dron.jpg" alt="Moj dron">
-  <p>Kratek opis slike.</p>
+  document.querySelectorAll(".mreza img").forEach(function (slika) {
+    slika.addEventListener("click", function () {
+      velikaSlika.src = slika.src;
+      velikaSlika.alt = slika.alt;
+      povecava.classList.add("odprto");
+    });
+  });
 
-  <h2>Domači strežnik</h2>
-  <img src="slike/streznik.jpg" alt="Moj domači strežnik">
-  <p>Kratek opis slike.</p>
-
+  povecava.addEventListener("click", function () {
+    povecava.classList.remove("odprto");
+  });
+</script>
 </body>
 </html>
