@@ -9,29 +9,43 @@
 <style>
   body {
     margin: 0;
-    background-color: #eef1f0;
+    background-color: white;
     font-family: "Inter", sans-serif;
-    color: #1f2328;
+    color: #111;
     line-height: 1.6;
   }
 
   .stran {
     display: grid;
-    grid-template-columns: 320px 1fr;
-    max-width: 100vh;
+    grid-template-columns: 2fr 3fr;
+    mini-height: 100vh;
+	
+	
   }
 
 .levo {
+position: relative;
   order: 1;
-  background-color: #1f2a27;
-  color: #e6ece9;
-  padding: 48px 32px;
+  color: #111;
+  padding: 48px 80px 48px 32px;
+  border-right: 1px solid #e5e5e5;
 }
-
+.levo::before {
+  content: "";
+  position: absolute;
+ inset: 32px;
+  background-image: url("labirint_v.svg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
 .desno {
   order: 2;
-  background-color: white;
   padding: 64px;
+  max-width: 760px;
 }
 
   h1 {
@@ -40,7 +54,7 @@
   }
 
   .podnaslov {
-    color: #2f6f5e;
+    color: #666;
     font-weight: 600;
     margin-top: 4px;
   }
@@ -49,12 +63,12 @@
     font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: #6b7280;
+    color: #999;
     margin-top: 32px;
   }
 
   .levo h2 {
-  color: #8fb8aa;
+  color: #999;
   margin-top: 0;
 }
 
@@ -67,22 +81,23 @@
   }
 
   .znacke li {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: transparent; border: 1px solid #ddd;
 }
-  
-
   .znacke li {
-    background-color: #e6efec;
+    background-color: #ddd;
     padding: 4px 12px;
     border-radius: 999px;
     font-size: 0.85rem;
   }
+.levo p {
+  max-width: 40ch;
+}
 
 .desno p {
   max-width: 60ch;
 }
   a {
-    color: #2f6f5e;
+    color: #111;
     font-weight: 600;
     text-decoration: none;
   }
@@ -90,17 +105,40 @@
   a:hover {
     text-decoration: underline;
   }
+.projekt {
+display: block;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+  color: #111;
+  text-decoration: none;
+  font-weight: normal;
+  transition: 0.2s;
+}
 
+.projekt:hover {
+  border-color: #111;
+  transform: translateY(-2px);
+}
+
+.projekt h3 {
+  margin-top: 0;
+}
  @media (max-width: 700px) {
   .stran {
     grid-template-columns: 1fr;
   }
+  .desno::before {
+  width: 150px;
+  height: 150px;
+}
   .desno {
-    order: 1;
+    order: 2;
     padding: 32px 16px;
   }
   .levo {
-    order: 2;
+    order: 1;
     padding: 32px 16px;
   }
 }
@@ -108,19 +146,20 @@
   display: inline-block;
   margin-top: 16px;
   padding: 10px 20px;
-  border: 2px solid #2f6f5e;
+  border: 1.5px solid #ddd;
   border-radius: 10px;
-  color: #2f6f5e;
+  color: #111;
   font-weight: 600;
   text-decoration: none;
   transition: 0.2s;
 }
 
 .gumb:hover {
-  background-color: #2f6f5e;
+  background-color: #111;
   color: white;
   text-decoration: none;
 }
+
   
 
 </style>
@@ -128,36 +167,47 @@
 <body>
   <div class="stran">
   <main class="levo">
-  <h1>Valentin B</h1>
+  <h1>Valentin </h1>
     
-	<p class="podnaslov"> Študent računalništva in informatike na VSŠ.</p>
-    <p>V prostem času nadgrajujem svoj domači strežnik in rešujem težave, ki se pri tem pojavijo.</p> 
+	<p class="podnaslov"> Sem študent računalništva in informatike na VSŠ.</p>
+    <p>Največ se naučim s praktičnim delom na projektih, 
+	zato sem si doma postavil strežnik s Proxmoxom in kontejnerji. Omrežje upravljam s svojim usmerjevalnikom s pfSense.</p>
+		<p>Poleg tega rad programiram v C# in modeliram v Fusion 360.</p>
 </main>
     <aside class="desno">
     <h2>Projekti</h2>
-      
-      <h3>Programiranje</h3>
-      <ul class="znacke">
-      <ul>
-      <li>SQL (osnove)</li>
-      <li>C# (osnove)</li>
-      </ul>
-
-      <h4>Strežnik in omrežje</h4>
+	<h3>Strežnik in omrežje</h3>
+	<div class="projekt">
+	<a href="slike.html#dron" class="projekt">
+	<h3>Domač strežnik</h3>
+	</a>
         <ul class="znacke">
-      <ul>  
+        
       <li>Linux (Dobro)</li>
         <li>Proxmox (Osnovno)</li>
         <li>Podman (Dobro)</li>
         <li>Pfsense (Doboro)</li>
       </ul>
-
-      <h5>Ostalo</h5>
+</div>
+<h3>Programiranje</h3>
+<div class="projekt">
+      <ul class="znacke">
+      
+      <li>SQL (osnove)</li>
+      <li>C# (osnove)</li>
+      </ul>
+	  </div>
+      <h3>Ostalo</h3>
+	  <div class="projekt">
+	  <a href="slike.html#dron" class="projekt">
+	  <h3>Dron</h3>
+	  </a>
           <ul class="znacke">
-       <ul>
+       
           <li>3D modeliranje fusion 360 (Dobro)</li>
+		  <li>3D tisk</li>
         </ul>
-      <a href="slike.html" class="gumb">Poglej slike projektov </a>
-      </div>
+      </aside>
+	  </div>
 </body>
 </html>
