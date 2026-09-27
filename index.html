@@ -69,7 +69,7 @@ position: relative;
 
   .levo h2 {
   color: #999;
-  margin-top: 0;
+  margin-top: 100px;
 }
 
 
@@ -181,6 +181,12 @@ footer {
     <p>Največ se naučim s praktičnim delom na projektih, 
 	zato sem si doma postavil strežnik s Proxmoxom in kontejnerji. Omrežje upravljam s svojim usmerjevalnikom s pfSense.</p>
 		<p>Poleg tega rad programiram v C# in modeliram v Fusion 360.</p>
+		
+		<h2>Kontakti</h2>
+		<ul class="povezave">
+		<li><a id="mail" href="#">pokaži e-pošto</a></li>
+		<li><a href="https://github.com/bato121">Github</a></li>
+		<li><a href="https://www.printables.com/@bato_5440178">Printables</a></li>
 </main>
     <aside class="desno">
     <h2>Projekti</h2>
@@ -219,5 +225,13 @@ footer {
       </aside>
 	  </div>
 	  <footer>© 2026 Valentin</footer>
+	  <script>
+  const ime = "valentin";
+  const domena = "tuta.com";
+  const naslov = ime + "@" + domena;
+  const povezava = document.getElementById("mail");
+  povezava.href = "mailto:" + naslov;
+  povezava.textContent = naslov;
+</script>
 </body>
 </html>
