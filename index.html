@@ -250,7 +250,7 @@ footer {
 </style>
 <button id="ai-btn" aria-label="Odpri klepet">💬</button>
 <div id="ai-box">
-  <div id="ai-head">Vprašaj me karkoli</div>
+  <div id="ai-head">Janez - Valentinov asistent</div>
   <div id="ai-log"></div>
   <form id="ai-form">
     <input id="ai-input" placeholder="Napiši sporočilo…" maxlength="1000" autocomplete="off">
@@ -285,7 +285,7 @@ footer {
   };
   document.getElementById("ai-btn").onclick = () => {
     box.classList.toggle("open");
-    if (!log.children.length) add("Živjo! Kaj te zanima?", "ai-bot");
+    if (!log.children.length) add("Živjo! Sem janez, Valentinov AI asistent 🤖. Kaj ti lahko pomgam?", "ai-bot");
     input.focus();
   };
   form.onsubmit = async (e) => {
