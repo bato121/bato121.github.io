@@ -235,6 +235,7 @@ footer {
 </script>
 	<!-- AI asistent -->
 <style>
+.ai-msg a{color:inherit;text-decoration:underline}.ai-bot a{color:#2563eb}
 #ai-btn{position:fixed;right:16px;bottom:16px;width:56px;height:56px;border-radius:50%;border:0;background:#2563eb;color:#fff;font-size:24px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.25);z-index:9999}
 #ai-box{position:fixed;right:16px;bottom:84px;width:min(360px,calc(100vw - 32px));height:min(480px,calc(100vh - 120px));display:none;flex-direction:column;background:#fff;color:#111;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.25);overflow:hidden;z-index:9999;font-family:system-ui,sans-serif}
 #ai-box.open{display:flex}
@@ -262,9 +263,24 @@ footer {
   const box = document.getElementById("ai-box"), log = document.getElementById("ai-log");
   const form = document.getElementById("ai-form"), input = document.getElementById("ai-input");
   const history = [];
+    const setText = (el, text) => {
+    el.textContent = "";
+    const re = /\[([^\]]+)\]\((https:\/\/[^\s)]+)\)|(https:\/\/[^\s<>()]*[^\s<>().,!?;:])/g;
+    let last = 0, m;
+    while ((m = re.exec(text))) {
+      el.append(text.slice(last, m.index));
+      const a = document.createElement("a");
+      a.href = m[2] || m[3];
+      a.textContent = m[1] || m[3];
+      a.target = "_blank"; a.rel = "noopener noreferrer";
+      el.append(a);
+      last = re.lastIndex;
+    }
+    el.append(text.slice(last));
+  };
   const add = (text, cls) => {
     const d = document.createElement("div");
-    d.className = "ai-msg " + cls; d.textContent = text;
+    d.className = "ai-msg " + cls; setText(d, text);
     log.appendChild(d); log.scrollTop = log.scrollHeight; return d;
   };
   document.getElementById("ai-btn").onclick = () => {
@@ -284,7 +300,7 @@ footer {
         body: JSON.stringify({ messages: history.slice(-10) }),
       });
       const d = await r.json();
-      wait.textContent = d.reply || d.error || "Napaka.";
+      setText(wait, d.reply || d.error || "Napaka.");
       if (d.reply) history.push({ role: "assistant", content: d.reply });
     } catch { wait.textContent = "Povezava ni uspela."; }
   };
