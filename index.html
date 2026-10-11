@@ -4,265 +4,542 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Valentin</title>
+  <meta name="description" content="Valentin – domač strežnik, dron, 3D modeliranje v Fusion 360 in tiskanine. Programiram v C#.">
+  <link rel="icon" href="ikona.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&display=swap" rel="stylesheet">
 <style>
+  :root {
+    --bel: #ffffff;
+    --grafit: #1d2b23;
+    --siva: #5d6b58;
+    --crta: #d3d9ce;
+    --polje: #eef0eb;
+    --rdeca: #d42a20;
+    --sirina: 760px;
+  }
+
+  * { box-sizing: border-box; }
+
   body {
     margin: 0;
-    background-color: white;
-    font-family: "Inter", sans-serif;
-    color: #111;
+    background: var(--bel);
+    color: var(--grafit);
+    font-family: "Archivo", system-ui, sans-serif;
+    font-size: 18px;
     line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
   }
 
-  .stran {
-    display: grid;
-    grid-template-columns: 2fr 3fr;
-    mini-height: 100vh;
-	
-	
-  }
+  a { color: inherit; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+  a:hover { color: var(--rdeca); }
+  :focus-visible { outline: 2px solid var(--rdeca); outline-offset: 4px; }
 
-.levo {
-position: relative;
-  order: 1;
-  color: #111;
-  padding: 48px 80px 48px 32px;
-  border-right: 1px solid #e5e5e5;
-}
-.levo::before {
-  content: "";
-  position: absolute;
- inset: 32px;
-  background-image: url("labirint_v.svg");
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.2;
-  pointer-events: none;
-  z-index: -1;
-}
-.desno {
-  order: 2;
-  padding: 64px;
-  max-width: 760px;
-}
+  .vsebina { max-width: var(--sirina); margin: 0 auto; padding: 0 24px; }
 
+  /* ---------- Uvod ---------- */
+  .uvod { position: relative; padding: 112px 0 88px; }
+  .uvod .logo { width: 104px; height: 104px; display: block; margin-bottom: 36px; }
   h1 {
-    font-size: 2.2rem;
+    font-stretch: 125%;
+    font-weight: 800;
+    font-size: clamp(3.2rem, 10vw, 6.4rem);
+    line-height: .95;
+    letter-spacing: -0.02em;
     margin: 0;
   }
+  .podnaslov { font-stretch: 110%; font-weight: 500; font-size: 1.3rem; margin: 20px 0 0; }
+  .opis { color: var(--siva); max-width: 44ch; margin: 8px 0 0; }
+  .povezave { list-style: none; padding: 0; margin: 32px 0 0; display: flex; flex-wrap: wrap; gap: 12px 28px; }
+  .povezave a { font-weight: 600; }
+  #mail { color: var(--rdeca); }
 
-  .podnaslov {
-    color: #666;
-    font-weight: 600;
-    margin-top: 4px;
+  /* ---------- Veja, ki zraste z roba strani (rast in razvoj) ---------- */
+  /* Veja raste iz desnega roba proti imenu (na ozkih zaslonih majhna spodaj desno) */
+  .veja {
+    position: absolute;
+    right: 0;
+    bottom: -10px;
+    width: 180px;
+    height: auto;
+    overflow: visible;
+    transform: scaleX(-1);
+  }
+  @media (min-width: 1101px) {
+    .veja {
+      bottom: auto;
+      top: 52%;
+      width: min(560px, 42vw);
+      transform: translateY(-50%) scaleX(-1);
+    }
+  }
+  .veja .stebelce { fill: none; stroke: #4a5a3c; stroke-width: 2.2; stroke-linecap: round; }
+  .veja .stebelce.tanko { stroke-width: 1.4; }
+  .veja .list path:first-child { fill: #6a9a45; }
+  .veja .list path + path { fill: none; stroke: #43692a; stroke-width: .8; }
+  .veja .list.mlad path:first-child { fill: #9cc56b; }
+  .veja .zibanje { transform-origin: 0 100px; animation: veter 7s 3.2s ease-in-out infinite; }
+
+  .veja .stebelce { stroke-dasharray: 1; stroke-dashoffset: 1; animation: rasti 2s ease-out forwards; }
+  .veja .stebelce.tanko { animation-duration: .8s; }
+  .veja .list { transform: scale(0); animation: vzkali .7s cubic-bezier(.3,1.6,.5,1) forwards; }
+  .veja .stebelce.suho { stroke: #a8916d; stroke-width: 1.5; animation-duration: .9s; }
+  @keyframes rasti { to { stroke-dashoffset: 0; } }
+  @keyframes vzkali { to { transform: scale(1); } }
+  @keyframes veter { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(-1.2deg); } }
+  @media (prefers-reduced-motion: reduce) {
+    .veja .stebelce, .veja .list, .veja .zibanje { animation: none; stroke-dashoffset: 0; transform: none; }
   }
 
+  /* ---------- Sekcije ---------- */
+  main { border-top: 1px solid var(--crta); padding: 72px 0 112px; }
+  section + section { margin-top: 96px; }
   h2 {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #999;
-    margin-top: 32px;
+    font-stretch: 125%;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--siva);
+    margin: 0 0 24px;
   }
 
-  .levo h2 {
-  color: #999;
-  margin-top: 100px;
-}
+  .projekt {
+    position: relative;
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 8px 32px;
+    padding: 32px 0;
+    border-top: 1px solid var(--crta);
+  }
+  .projekt:last-child { border-bottom: 1px solid var(--crta); }
+  .projekt h3 { font-stretch: 115%; font-weight: 700; font-size: 1.3rem; line-height: 1.3; margin: 0; }
+  .projekt p { margin: 0; max-width: 46ch; }
+  .projekt .orodja { color: var(--siva); font-size: .95rem; margin-top: 10px; }
+  .projekt a { display: inline-block; margin-top: 10px; font-weight: 600; }
 
+  /* ---------- Dron, ki vzleti ---------- */
+  .projekt-dron { padding-right: 150px; }
+  .dron-oder {
+    position: absolute;
+    right: 0;
+    bottom: 32px;
+    width: 130px;
+    height: 120px;
+    pointer-events: none;
+  }
+  .dron-oder .ploscad {
+    position: absolute; left: 15px; right: 15px; bottom: 0;
+    height: 2px; background: var(--crta);
+  }
+  .dron-oder .ploscad::after {
+    content: "H"; position: absolute; left: 50%; top: 6px; transform: translateX(-50%);
+    font-size: .7rem; font-weight: 700; color: var(--siva);
+  }
+  .dron {
+    position: absolute; left: 15px; bottom: 2px;
+    width: 100px; height: 50px;
+    transition: transform .9s cubic-bezier(.4,0,.2,1);
+  }
+  .dron svg { width: 100%; height: 100%; overflow: visible; }
+  .dron .lebdi { transform-origin: 50px 25px; }
+  .dron .propeler { transform-box: fill-box; transform-origin: center; }
+  .dron .led { fill: #8a8f96; }
 
-  
+  .projekt-dron.leti .dron { transform: translateY(-58px); }
+  .projekt-dron.leti .lebdi { animation: lebdi 3.2s .9s ease-in-out infinite; }
+  .projekt-dron.leti .propeler { animation: vrti .09s linear infinite; }
+  .projekt-dron.leti .led { fill: var(--rdeca); animation: utripa 1s steps(2) infinite; }
+  .projekt-dron.leti .senca { transform: scaleX(.55); opacity: .35; }
+  .dron-oder .senca {
+    position: absolute; left: 35px; bottom: -3px; width: 60px; height: 6px;
+    border-radius: 50%; background: var(--grafit); opacity: .12;
+    transition: .9s cubic-bezier(.4,0,.2,1);
+  }
+  @keyframes lebdi {
+    0%, 100% { transform: translate(0, 0) rotate(0); }
+    25% { transform: translate(-8px, -5px) rotate(-3deg); }
+    50% { transform: translate(0, -9px) rotate(0); }
+    75% { transform: translate(8px, -4px) rotate(3deg); }
+  }
+  @keyframes vrti { 50% { transform: scaleX(.25); } }
+  @keyframes utripa { 50% { fill: #f0b3ae; } }
 
-  h3 {
-    font-size: 0.95rem;
-    margin: 20px 0 8px;
+  /* ---------- Strežnik: lučke utripajo, ob miški steče promet ---------- */
+  .projekt-streznik { padding-right: 150px; }
+  .streznik-oder { position: absolute; right: 0; top: 32px; width: 130px; height: 120px; pointer-events: none; }
+  .streznik-oder svg { width: 100%; height: 100%; overflow: visible; }
+  .streznik-oder .ld { fill: #c4ccc0; animation: lucka 2.4s steps(1) infinite; }
+  .streznik-oder .ld.z { --on: #3fae49; }
+  .streznik-oder .ld.o { --on: #f2a232; }
+  .streznik-oder .ld.m { --on: #2a6fb3; }
+  .streznik-oder .paketi circle { fill: var(--rdeca); opacity: 0; }
+  .projekt-streznik.aktiven .ld { animation-duration: .35s; }
+  .projekt-streznik.aktiven .paketi circle { animation: paket 1.1s linear infinite; }
+  .projekt-streznik.aktiven .paketi circle:nth-child(2) { animation-delay: .37s; }
+  .projekt-streznik.aktiven .paketi circle:nth-child(3) { animation-delay: .74s; }
+  @keyframes lucka { 0%, 60% { fill: var(--on); } 61%, 100% { fill: #c4ccc0; } }
+  @keyframes paket { 0% { opacity: 1; transform: translateX(0); } 90% { opacity: 1; } 100% { opacity: 0; transform: translateX(34px); } }
+
+  /* Barvne pikice tehnologij */
+  .tehnologije { list-style: none; padding: 0; margin: 12px 0 0; display: flex; flex-wrap: wrap; gap: 6px 18px; color: var(--siva); font-size: .95rem; }
+  .tehnologije li { display: inline-flex; align-items: center; gap: 7px; }
+  .tehnologije i { width: 10px; height: 10px; border-radius: 50%; background: var(--b); }
+
+  /* Nivo znanja kot pikice */
+  .nivo { display: inline-flex; gap: 5px; align-items: center; }
+  .nivo i { width: 9px; height: 9px; border-radius: 50%; background: var(--crta); }
+  .nivo[data-n="3"] i:nth-child(-n+3) { background: #6a9a45; }
+  .nivo[data-n="2"] i:nth-child(-n+2) { background: #9cc56b; }
+  .skrito { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* Pike pred naslovi */
+  h2 { display: flex; align-items: center; gap: 10px; }
+  .pika { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--b, var(--rdeca)); flex-shrink: 0; }
+  .zunaj strong { display: inline-flex; align-items: center; gap: 10px; }
+
+  /* ---------- Znanja ---------- */
+  .znanja { display: grid; grid-template-columns: 1fr 1fr; gap: 0 48px; margin: 0; }
+  .znanja div { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--crta); }
+  .znanja dt { font-weight: 600; }
+  .znanja dd { margin: 0; color: var(--siva); }
+
+  /* ---------- Izven računalnika ---------- */
+  .zunaj { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .zunaj li { display: grid; grid-template-columns: 180px 1fr; gap: 32px; }
+  .zunaj strong { font-stretch: 115%; }
+  .zunaj span { color: var(--siva); }
+
+  .kontakt p { margin: 0 0 20px; max-width: 46ch; }
+
+  footer { border-top: 1px solid var(--crta); padding: 28px 0; color: var(--siva); font-size: .85rem; }
+  footer .vsebina { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  /* ---------- Janez: znak asistenta ---------- */
+  .janez-znak .led-misli { fill: var(--rdeca); }
+  .janez-znak.razmislja .led-misli { animation: misli .7s ease-in-out infinite alternate; }
+  @keyframes misli { to { opacity: .2; } }
+
+  /* Janez – maskota, ki se sprehaja ob dnu zaslona */
+  #ai-btn {
+    position: fixed; left: 0; bottom: 8px; z-index: 9999;
+    width: 64px; height: 84px; padding: 0;
+    border: 0; background: none; cursor: pointer;
+    filter: drop-shadow(0 3px 6px rgba(29,43,35,.15));
+  }
+  #ai-btn svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  #ai-btn .j-telo { transform-origin: 32px 70px; }
+  #ai-btn .j-noga-l { transform-origin: 27px 64px; }
+  #ai-btn .j-noga-d { transform-origin: 37px 64px; }
+  #ai-btn .j-roka-d { transform-origin: 42px 54px; }
+  #ai-btn .j-oci { transition: transform .15s; }
+  #ai-btn .j-oko { transform-box: fill-box; transform-origin: center; animation: mezik 5s infinite; }
+  #ai-btn.hodi .j-telo { animation: hop .45s ease-in-out infinite; }
+  #ai-btn.hodi .j-noga-l { animation: korak .45s ease-in-out infinite; }
+  #ai-btn.hodi .j-noga-d { animation: korak .45s .225s ease-in-out infinite; }
+  #ai-btn.maha .j-roka-d { animation: maha .35s ease-in-out infinite alternate; }
+  @keyframes hop { 50% { transform: translateY(-2px); } }
+  @keyframes korak { 0%,100% { transform: rotate(16deg); } 50% { transform: rotate(-16deg); } }
+  @keyframes maha { to { transform: rotate(-120deg); } }
+  @keyframes mezik { 0%,95%,100% { transform: scaleY(1); } 97% { transform: scaleY(.15); } }
+  .janez-oblacek {
+    position: fixed; bottom: 100px; z-index: 9999;
+    padding: 7px 12px; background: var(--bel); color: var(--grafit);
+    border: 1.5px solid var(--grafit); border-radius: 10px 10px 2px 10px;
+    font-weight: 600; font-size: .9rem; white-space: nowrap;
+    opacity: 0; transform: translateY(6px); transition: opacity .2s, transform .2s; pointer-events: none;
+  }
+  .janez-oblacek.vidno { opacity: 1; transform: none; }
+  #ai-box {
+    position: fixed; right: 20px; bottom: 96px; z-index: 9999;
+    width: min(360px, calc(100vw - 32px));
+    height: min(480px, calc(100vh - 130px));
+    display: none; flex-direction: column;
+    background: var(--bel);
+    border: 1px solid var(--crta);
+    border-radius: 8px;
+    box-shadow: 0 12px 32px rgba(29,43,35,.14);
+    font-family: "Archivo", sans-serif;
+  }
+  #ai-box.open { display: flex; }
+  #ai-head { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--crta); }
+  #ai-head svg { width: 36px; height: 36px; flex-shrink: 0; }
+  #ai-head b { display: block; font-stretch: 115%; }
+  #ai-head small { display: block; color: var(--siva); font-size: .82rem; line-height: 1.3; }
+  #ai-log { flex: 1; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 8px; }
+  .ai-msg { max-width: 85%; padding: 8px 12px; border-radius: 8px; line-height: 1.45; white-space: pre-wrap; font-size: .95rem; }
+  .ai-msg a { color: inherit; text-decoration: underline; }
+  .ai-user { align-self: flex-end; background: var(--grafit); color: #fff; }
+  .ai-bot { align-self: flex-start; background: var(--polje); }
+  #ai-form { display: flex; border-top: 1px solid var(--crta); }
+  #ai-input { flex: 1; min-width: 0; border: 0; padding: 12px 14px; font: inherit; font-size: .95rem; color: var(--grafit); background: none; outline-offset: -3px; }
+  #ai-form button { border: 0; background: none; padding: 0 16px; color: var(--rdeca); font: 600 .95rem "Archivo", sans-serif; cursor: pointer; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dron, .dron-oder .senca { transition: none; }
+    .projekt-dron.leti .lebdi, .projekt-dron.leti .propeler, .projekt-dron.leti .led, .janez-znak .led-misli, .streznik-oder *, #ai-btn * { animation: none !important; }
   }
 
-  .znacke li {
-  background-color: transparent; border: 1px solid #ddd;
-}
-  .znacke li {
-    background-color: #ddd;
-    padding: 4px 12px;
-    border-radius: 999px;
-    font-size: 0.85rem;
+  /* ---------- Telefon ---------- */
+  @media (max-width: 700px) {
+    body { font-size: 17px; }
+    .vsebina { padding: 0 16px; }
+    .uvod { padding: 64px 0 56px; }
+    .veja { width: 150px; bottom: -4px; }
+    .uvod { padding-bottom: 96px; }
+    .uvod .logo { width: 84px; height: 84px; margin-bottom: 28px; }
+    main { padding: 56px 0 96px; }
+    section + section { margin-top: 72px; }
+    .projekt, .zunaj li { grid-template-columns: 1fr; gap: 4px 0; }
+    .zunaj { gap: 18px; }
+    .projekt-dron, .projekt-streznik { padding-right: 0; padding-top: 150px; }
+    .streznik-oder { top: 24px; right: auto; left: 0; }
+    .dron-oder { top: 24px; bottom: auto; right: auto; left: 0; }
+    .znanja { grid-template-columns: 1fr; }
   }
-.levo p {
-  max-width: 40ch;
-}
-
-.desno p {
-  max-width: 60ch;
-}
-  a {
-    color: #111;
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
-.projekt {
-display: block;
-  border: 1px solid #e5e5e5;
-  border-radius: 12px;
-  padding: 20px 24px;
-  margin-bottom: 16px;
-  color: #111;
-  text-decoration: none;
-  font-weight: normal;
-  transition: 0.2s;
-}
-
-.projekt:hover {
-  border-color: #111;
-  transform: translateY(-2px);
-}
-
-.projekt h3 {
-  margin-top: 0;
-}
-footer {
-  text-align: center;
-  color: #999;
-  font-size: 0.8rem;
-  padding: 24px;
-  border-top: 1px solid #e5e5e5;
-}
- @media (max-width: 700px) {
-  .stran {
-    grid-template-columns: 1fr;
-  }
-  .desno::before {
-  width: 150px;
-  height: 150px;
-}
-  .desno {
-    order: 2;
-    padding: 32px 16px;
-  }
-  .levo {
-    order: 1;
-    padding: 32px 16px;
-  }
-}
-  .gumb {
-  display: inline-block;
-  margin-top: 16px;
-  padding: 10px 20px;
-  border: 1.5px solid #ddd;
-  border-radius: 10px;
-  color: #111;
-  font-weight: 600;
-  text-decoration: none;
-  transition: 0.2s;
-}
-
-.gumb:hover {
-  background-color: #111;
-  color: white;
-  text-decoration: none;
-}
-
-  
-
 </style>
 </head>
-<link rel="icon" href="ikona.svg" type="image/svg+xml">
 <body>
-  <div class="stran">
-  <main class="levo">
-  <h1>Valentin </h1>
-    
-	<p class="podnaslov"> Sem študent računalništva in informatike na VSŠ Nova Gorica.</p>
-    <p>Najraje se učim ob praktičnih projektih: doma imam strežnik s Proxmoxom in kontejnerji, omrežje pa upravljam s pfSense.</p>
-<p>Programiram v C# in modeliram v Fusion 360.</p>
-		
-		<h2>Kontakti</h2>
-		<ul class="povezave">
-		<li><a id="mail" href="#">pokaži e-pošto</a></li>
-		<li><a href="https://github.com/bato121">Github</a></li>
-		<li><a href="https://www.printables.com/@bato_5440178">Printables</a></li>
+
+<header class="uvod">
+  <div class="vsebina">
+    <img class="logo" src="labirint_v_rdec.svg" alt="Valentinov logotip">
+    <h1>Valentin</h1>
+    <!-- Sem napiši, kaj iščeš, npr. »Iščem praktično usposabljanje v IT« -->
+    <p class="podnaslov">Sem študent računalništva in informatike na VSŠ Nova Gorica.</p>
+    <p class="opis">Programiram v C# in modeliram v Fusion 360. Rad se lotim stvari, ki jih še ne znam, in ne odneham, dokler ne delujejo.</p>
+    <ul class="povezave">
+      <li><a id="mail" href="#kontakt">E-pošta</a></li>
+      <li><a href="https://github.com/bato121" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+      <li><a href="https://www.printables.com/@bato_5440178" target="_blank" rel="noopener noreferrer">Printables</a></li>
+    </ul>
+  </div>
+  <!-- Veja z zelenimi listi: zraste z roba strani in pomeni rast in razvoj -->
+  <svg class="veja" viewBox="0 0 320 120" aria-hidden="true">
+    <g class="zibanje">
+      <path class="stebelce" pathLength="1" d="M-20 104 C40 100 100 88 150 66 S250 30 292 20"/>
+      <path class="stebelce tanko" pathLength="1" style="animation-delay:1.2s" d="M118 80 C126 66 128 58 126 48"/>
+      <!-- Posušena stranska veje: poti, na katerih nisem nadaljeval -->
+      <path class="stebelce suho" pathLength="1" style="animation-delay:.9s" d="M58 96 C62 86 60 78 53 72 M60 84 C64 80 67 79 70 79 M55 75 L50 70"/>
+      <path class="stebelce suho" pathLength="1" style="animation-delay:1.4s" d="M204 45 C212 54 219 64 222 82 M217 64 C222 66 227 66 232 62 M227 66 L230 72 M220 76 L214 81"/>
+      <g transform="translate(126 48) rotate(-10)"><g class="list mlad" style="animation-delay:1.9s"><path d="M0 0 C-7 -6 -7 -17 0 -24 C7 -17 7 -6 0 0 Z"/><path d="M0 -2 V-21"/></g></g>
+      <g transform="translate(42 97) rotate(-35)"><g class="list" style="animation-delay:0.7s"><path d="M0 0 C-7 -6 -7 -17 0 -24 C7 -17 7 -6 0 0 Z"/><path d="M0 -2 V-21"/></g></g>
+      <g transform="translate(70 93) rotate(150)"><g class="list" style="animation-delay:0.9s"><path d="M0 0 C-7 -6 -7 -17 0 -24 C7 -17 7 -6 0 0 Z"/><path d="M0 -2 V-21"/></g></g>
+      <g transform="translate(100 86) rotate(-25)"><g class="list" style="animation-delay:1.1s"><path d="M0 0 C-7 -6 -7 -17 0 -24 C7 -17 7 -6 0 0 Z"/><path d="M0 -2 V-21"/></g></g>
+      <g transform="translate(132 74) rotate(165)"><g class="list" style="animation-delay:1.3s"><path d="M0 0 C-7 -6 -7 -17 0 -24 C7 -17 7 -6 0 0 Z"/><path d="M0 -2 V-21"/></g></g>
+      <g transform="translate(160 63) rotate(-20)"><g class="list" style="animation-delay:1.5s"><path d="M0 0 C-7 -6 -7 -17 0 -24 C7 -17 7 -6 0 0 Z"/><path d="M0 -2 V-21"/></g></g>
+      <g transform="translate(196 48) rotate(150)"><g class="list" style="animation-delay:1.7s"><path d="M0 0 C-7 -6 -7 -17 0 -24 C7 -17 7 -6 0 0 Z"/><path d="M0 -2 V-21"/></g></g>
+      <g transform="translate(226 38) rotate(-15)"><g class="list" style="animation-delay:1.9s"><path d="M0 0 C-7 -6 -7 -17 0 -24 C7 -17 7 -6 0 0 Z"/><path d="M0 -2 V-21"/></g></g>
+      <g transform="translate(258 28) rotate(140)"><g class="list" style="animation-delay:2.1s"><path d="M0 0 C-7 -6 -7 -17 0 -24 C7 -17 7 -6 0 0 Z"/><path d="M0 -2 V-21"/></g></g>
+      <g transform="translate(292 20) rotate(60)"><g class="list mlad" style="animation-delay:2.4s"><path d="M0 0 C-7 -6 -7 -17 0 -24 C7 -17 7 -6 0 0 Z"/><path d="M0 -2 V-21"/></g></g>
+    </g>
+  </svg>
+</header>
+
+<main>
+  <div class="vsebina">
+
+    <section aria-labelledby="h-projekti">
+      <h2 id="h-projekti"><i class="pika" aria-hidden="true"></i>Projekti</h2>
+
+      <article class="projekt projekt-streznik" id="streznik" tabindex="0">
+        <h3>Domač strežnik</h3>
+        <div>
+          <!-- Opiši: kaj si postavil, zakaj, kaj je šlo narobe in kako si rešil. -->
+          <p>Svoj strežnik in domače omrežje vzdržujem sam: virtualizacija, storitve v kontejnerjih in lasten požarni zid.</p>
+          <ul class="tehnologije">
+            <li><i style="--b:#f2b632"></i>Linux</li>
+            <li><i style="--b:#e57000"></i>Proxmox</li>
+            <li><i style="--b:#892ca0"></i>Podman</li>
+            <li><i style="--b:#2a6fb3"></i>pfSense</li>
+          </ul>
+          <a href="slike.html#streznik">Poglej slike</a>
+        </div>
+              <div class="streznik-oder" aria-hidden="true">
+          <svg viewBox="0 0 130 120">
+            <!-- omrežni kabel s paketi -->
+            <path d="M90 92 H130" stroke="#1d2b23" stroke-width="2" stroke-linecap="round"/>
+            <g class="paketi"><circle cx="96" cy="92" r="2.6"/><circle cx="96" cy="92" r="2.6"/><circle cx="96" cy="92" r="2.6"/></g>
+            <!-- omara -->
+            <rect x="12" y="6" width="80" height="108" rx="5" fill="#fff" stroke="#1d2b23" stroke-width="2.2"/>
+            <g class="enota">
+              <rect x="18" y="14" width="68" height="26" rx="3" fill="#fff" stroke="#1d2b23" stroke-width="1.8"/>
+              <circle class="ld z" cx="27" cy="27" r="2.6"/><circle class="ld o" cx="35" cy="27" r="2.6" style="animation-delay:.3s"/>
+              <path d="M52 21 V33 M58 21 V33 M64 21 V33 M70 21 V33 M76 21 V33" stroke="#c4ccc0" stroke-width="2"/>
+            </g>
+            <g class="enota">
+              <rect x="18" y="46" width="68" height="26" rx="3" fill="#fff" stroke="#1d2b23" stroke-width="1.8"/>
+              <circle class="ld z" cx="27" cy="59" r="2.6" style="animation-delay:.7s"/><circle class="ld o" cx="35" cy="59" r="2.6" style="animation-delay:.1s"/>
+              <path d="M52 53 V65 M58 53 V65 M64 53 V65 M70 53 V65 M76 53 V65" stroke="#c4ccc0" stroke-width="2"/>
+            </g>
+            <g class="enota">
+              <rect x="18" y="78" width="68" height="26" rx="3" fill="#fff" stroke="#1d2b23" stroke-width="1.8"/>
+              <circle class="ld z" cx="27" cy="91" r="2.6" style="animation-delay:.45s"/><circle class="ld m" cx="35" cy="91" r="2.6" style="animation-delay:.9s"/>
+              <path d="M52 85 V97 M58 85 V97 M64 85 V97 M70 85 V97 M76 85 V97" stroke="#c4ccc0" stroke-width="2"/>
+            </g>
+          </svg>
+        </div>
+      </article>
+
+      <article class="projekt projekt-dron" id="dron" tabindex="0">
+        <h3>Dron</h3>
+        <div>
+          <!-- Dopolni: iz katerih delov je, kaj je bilo pri sestavljanju najtežje, kaj si se naučil. -->
+          <p>Sam sem sestavil FPV dron.</p>
+          <a href="slike.html#dron">Poglej slike</a>
+        </div>
+
+        <div class="dron-oder" aria-hidden="true">
+          <div class="ploscad"></div>
+          <div class="senca"></div>
+          <div class="dron">
+            <svg viewBox="0 0 100 50">
+              <g class="lebdi">
+                <!-- propelerja -->
+                <ellipse class="propeler" cx="16" cy="9" rx="15" ry="2.2" fill="#1d2b23"/>
+                <ellipse class="propeler" cx="84" cy="9" rx="15" ry="2.2" fill="#1d2b23"/>
+                <!-- motorja -->
+                <rect x="13" y="11" width="6" height="7" rx="1.5" fill="#1d2b23"/>
+                <rect x="81" y="11" width="6" height="7" rx="1.5" fill="#1d2b23"/>
+                <!-- roki -->
+                <path d="M16 18 L36 24 M84 18 L64 24" stroke="#1d2b23" stroke-width="3" stroke-linecap="round"/>
+                <!-- ohišje (3D tisk) -->
+                <rect x="34" y="19" width="32" height="13" rx="4" fill="#fff" stroke="#1d2b23" stroke-width="2.4"/>
+                <circle class="led" cx="50" cy="25.5" r="2.4"/>
+                <!-- noge -->
+                <path d="M40 32 L36 42 M60 32 L64 42 M32 42 H42 M58 42 H68" stroke="#1d2b23" stroke-width="2" stroke-linecap="round" fill="none"/>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section aria-labelledby="h-znanja">
+      <h2 id="h-znanja"><i class="pika" aria-hidden="true"></i>Znanja</h2>
+      <dl class="znanja">
+        <div><dt>Linux</dt><dd><span class="nivo" data-n="3" title="dobro"><i></i><i></i><i></i><i></i></span><span class="skrito">dobro</span></dd></div>
+        <div><dt>Fusion 360</dt><dd><span class="nivo" data-n="3" title="dobro"><i></i><i></i><i></i><i></i></span><span class="skrito">dobro</span></dd></div>
+        <div><dt>Podman</dt><dd><span class="nivo" data-n="3" title="dobro"><i></i><i></i><i></i><i></i></span><span class="skrito">dobro</span></dd></div>
+        <div><dt>3D tisk</dt><dd><span class="nivo" data-n="3" title="dobro"><i></i><i></i><i></i><i></i></span><span class="skrito">dobro</span></dd></div>
+        <div><dt>pfSense</dt><dd><span class="nivo" data-n="3" title="dobro"><i></i><i></i><i></i><i></i></span><span class="skrito">dobro</span></dd></div>
+        <div><dt>Eagle PCB</dt><dd><span class="nivo" data-n="2" title="osnove"><i></i><i></i><i></i><i></i></span><span class="skrito">osnove</span></dd></div>
+        <div><dt>Proxmox</dt><dd><span class="nivo" data-n="2" title="osnove"><i></i><i></i><i></i><i></i></span><span class="skrito">osnove</span></dd></div>
+        <div><dt>C#</dt><dd><span class="nivo" data-n="2" title="osnove"><i></i><i></i><i></i><i></i></span><span class="skrito">osnove</span></dd></div>
+        <div><dt>SQL</dt><dd><span class="nivo" data-n="2" title="osnove"><i></i><i></i><i></i><i></i></span><span class="skrito">osnove</span></dd></div>
+      </dl>
+    </section>
+
+    <section aria-labelledby="h-zunaj">
+      <h2 id="h-zunaj"><i class="pika" aria-hidden="true"></i>V prostem času</h2>
+      <!-- Dopolni s svojimi podatki: pas pri ju-jitsu, razdalje, najljubši hribi … -->
+      <ul class="zunaj">
+        <li><strong><i class="pika" style="--b:#d42a20"></i>Ju-jitsu</strong><span>Disciplina in mirna glava pod pritiskom.</span></li>
+        <li><strong><i class="pika" style="--b:#f2a232"></i>Tek</strong><span>Vzdržljivost in rutina.</span></li>
+        <li><strong><i class="pika" style="--b:#6a9a45"></i>Gore in hribi</strong><span>Kjer si zbistrim glavo.</span></li>
+      </ul>
+    </section>
+
+    <section class="kontakt" id="kontakt" aria-labelledby="h-kontakt">
+      <h2 id="h-kontakt"><i class="pika" aria-hidden="true"></i>Kontakt</h2>
+      <p>Iščeš nekoga za svojo ekipo? Piši mi. Ali pa najprej vprašaj <a href="#ai-box" onclick="event.preventDefault(); if (!document.getElementById('ai-box').classList.contains('open')) document.getElementById('ai-btn').click();">asistenta Janeza</a>.</p>
+    </section>
+
+  </div>
 </main>
-    <aside class="desno">
-    <h2>Projekti</h2>
-	<h3>Strežnik in omrežje</h3>
-	<div class="projekt">
-	<a href="slike.html#streznik" class="projekt">
-	<h3>Domač strežnik</h3>
-	</a>
-        <ul class="znacke">
-        
-      <li>Linux (Dobro)</li>
-        <li>Proxmox (Osnovno)</li>
-        <li>Podman (Dobro)</li>
-        <li>Pfsense (Doboro)</li>
-      </ul>
-</div>
-<h3>Programiranje</h3>
-<div class="projekt">
-      <ul class="znacke">
-      
-      <li>SQL (osnove)</li>
-      <li>C# (osnove)</li>
-      </ul>
-	  </div>
-      <h3>Ostalo</h3>
-	  <div class="projekt">
-	  <a href="slike.html#dron" class="projekt">
-	  <h3>Dron</h3>
-	  </a>
-          <ul class="znacke">
-       
-          <li>3D modeliranje fusion 360 (Dobro)</li>
-		  <li>3D tisk</li>
-		  <li>Eagle pcb</li>
-        </ul>
-      </aside>
-	  </div>
-	  <footer>© 2026 Valentin</footer>
-	  <script>
-  const ime = "valentin";
-  const domena = "tuta.com";
-  const naslov = ime + "@" + domena;
-  const povezava = document.getElementById("mail");
-  povezava.href = "mailto:" + naslov;
-  povezava.textContent = naslov;
+
+<footer>
+  <div class="vsebina">
+    <span>© 2026 Valentin</span>
+    <span>Statična stran brez sledilcev in piškotkov</span>
+  </div>
+</footer>
+
+<script>
+  // ---------- E-pošta (sestavi se šele v brskalniku – zaščita pred spamom) ----------
+  // Vpiši svoj naslov: ime = "valentin", domena = "primer.si"
+  const ime = "";
+  const domena = "";
+  if (ime && domena) {
+    const naslov = ime + "@" + domena;
+    const povezava = document.getElementById("mail");
+    povezava.href = "mailto:" + naslov;
+    povezava.textContent = naslov;
+  }
+
+  // ---------- Strežnik: promet ob miški ----------
+  (() => {
+    const s = document.getElementById("streznik");
+    const on = () => s.classList.add("aktiven"), off = () => s.classList.remove("aktiven");
+    ["mouseenter","focusin"].forEach(e => s.addEventListener(e, on));
+    ["mouseleave","focusout"].forEach(e => s.addEventListener(e, off));
+    if (matchMedia("(hover: none)").matches && "IntersectionObserver" in window)
+      new IntersectionObserver(([e]) => e.isIntersecting ? on() : off(), { threshold: 0.6 }).observe(s);
+  })();
+
+  // ---------- Dron vzleti, ko greš z miško na projekt ----------
+  (() => {
+    const p = document.getElementById("dron");
+    const vzleti = () => p.classList.add("leti");
+    const pristani = () => p.classList.remove("leti");
+    p.addEventListener("mouseenter", vzleti);
+    p.addEventListener("mouseleave", pristani);
+    p.addEventListener("focusin", vzleti);
+    p.addEventListener("focusout", pristani);
+    // Na telefonu (brez miške) vzleti, ko se projekt prikaže na zaslonu
+    if (matchMedia("(hover: none)").matches && "IntersectionObserver" in window) {
+      new IntersectionObserver(([e]) => e.isIntersecting ? vzleti() : pristani(), { threshold: 0.6 }).observe(p);
+    }
+  })();
 </script>
-	<!-- AI asistent -->
-<style>
-.ai-msg a{color:inherit;text-decoration:underline}.ai-bot a{color:#2563eb}
-#ai-btn{position:fixed;right:16px;bottom:16px;width:56px;height:56px;border-radius:50%;border:0;background:#2563eb;color:#fff;font-size:24px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.25);z-index:9999}
-#ai-box{position:fixed;right:16px;bottom:84px;width:min(360px,calc(100vw - 32px));height:min(480px,calc(100vh - 120px));display:none;flex-direction:column;background:#fff;color:#111;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.25);overflow:hidden;z-index:9999;font-family:system-ui,sans-serif}
-#ai-box.open{display:flex}
-#ai-head{padding:12px 16px;background:#2563eb;color:#fff;font-weight:600}
-#ai-log{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
-.ai-msg{max-width:85%;padding:8px 12px;border-radius:10px;line-height:1.4;white-space:pre-wrap}
-.ai-user{align-self:flex-end;background:#2563eb;color:#fff}
-.ai-bot{align-self:flex-start;background:#f1f1f1}
-#ai-form{display:flex;border-top:1px solid #ddd}
-#ai-input{flex:1;border:0;padding:12px;font:inherit;outline:none}
-#ai-form button{border:0;background:none;padding:0 16px;color:#2563eb;font-weight:600;cursor:pointer}
-</style>
-<button id="ai-btn" aria-label="Odpri klepet">💬</button>
-<div id="ai-box">
-  <div id="ai-head">Janez - Valentinov asistent</div>
+
+<!-- ---------- Asistent Janez ---------- -->
+<button id="ai-btn" aria-label="Odpri klepet z Janezom" aria-expanded="false" aria-controls="ai-box">
+  <svg class="janez-znak" id="janez-telo" viewBox="0 0 64 84" aria-hidden="true">
+    <g class="j-noga-l"><path d="M27 64 V78 H22" fill="none" stroke="#1d2b23" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g class="j-noga-d"><path d="M37 64 V78 H42" fill="none" stroke="#1d2b23" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g class="j-telo">
+      <path d="M32 14 V7" stroke="#1d2b23" stroke-width="2.2" stroke-linecap="round"/>
+      <circle class="led-misli" cx="32" cy="5" r="3.2" fill="#d42a20"/>
+      <path d="M4 24 h6 M4 31 h6 M4 38 h6 M54 24 h6 M54 31 h6 M54 38 h6" stroke="#1d2b23" stroke-width="2.2" stroke-linecap="round"/>
+      <rect x="10" y="14" width="44" height="34" rx="7" fill="#fff" stroke="#1d2b23" stroke-width="2.4"/>
+      <rect x="16" y="20" width="32" height="21" rx="4" fill="#1d2b23"/>
+      <g class="j-oci"><rect class="j-oko" x="22" y="25" width="5" height="8" rx="2" fill="#9cc56b"/><rect class="j-oko" x="37" y="25" width="5" height="8" rx="2" fill="#9cc56b"/></g>
+      <g class="j-roka-l"><path d="M22 54 L14 62" stroke="#1d2b23" stroke-width="2.6" stroke-linecap="round"/></g>
+      <g class="j-roka-d"><path d="M42 54 L50 62" stroke="#1d2b23" stroke-width="2.6" stroke-linecap="round"/></g>
+      <rect x="21" y="50" width="22" height="15" rx="3" fill="#fff" stroke="#1d2b23" stroke-width="2.2"/>
+      <path d="M35 54 V58 A3 3 0 0 1 29 58" fill="none" stroke="#1d2b23" stroke-width="1.6" stroke-linecap="round"/>
+      <circle cx="35" cy="53.5" r="1.5" fill="#fff" stroke="#1d2b23" stroke-width="1.2"/>
+    </g>
+  </svg>
+</button>
+<div class="janez-oblacek" id="janez-oblacek" aria-hidden="true">Kako ti lahko pomagam?</div>
+<div id="ai-box" role="dialog" aria-label="Klepet z asistentom">
+  <div id="ai-head">
+    <svg class="janez-znak" id="janez-glava" viewBox="2 2 60 48" aria-hidden="true">
+      <path d="M32 14 V7" stroke="#1d2b23" stroke-width="2.2" stroke-linecap="round"/>
+      <circle class="led-misli" cx="32" cy="5" r="3.2" fill="#d42a20"/>
+      <path d="M4 24 h6 M4 31 h6 M4 38 h6 M54 24 h6 M54 31 h6 M54 38 h6" stroke="#1d2b23" stroke-width="2.2" stroke-linecap="round"/>
+      <rect x="10" y="14" width="44" height="34" rx="7" fill="#fff" stroke="#1d2b23" stroke-width="2.4"/>
+      <rect x="16" y="20" width="32" height="21" rx="4" fill="#1d2b23"/>
+      <rect x="22" y="25" width="5" height="8" rx="2" fill="#9cc56b"/><rect x="37" y="25" width="5" height="8" rx="2" fill="#9cc56b"/>
+    </svg>
+    <div><b>Janez</b><small>Valentinov asistent – vprašaj ga o mojih projektih</small></div>
+  </div>
   <div id="ai-log"></div>
   <form id="ai-form">
-    <input id="ai-input" placeholder="Napiši sporočilo…" maxlength="1000" autocomplete="off">
+    <input id="ai-input" placeholder="Napiši vprašanje…" maxlength="1000" autocomplete="off" aria-label="Sporočilo">
     <button>Pošlji</button>
   </form>
 </div>
 <script>
 (() => {
   const URL_WORKER = "https://snowy-sky-82f2.dapt.workers.dev/";
+  const btn = document.getElementById("ai-btn");
+  const glava = document.getElementById("janez-glava");
   const box = document.getElementById("ai-box"), log = document.getElementById("ai-log");
   const form = document.getElementById("ai-form"), input = document.getElementById("ai-input");
   const history = [];
-    const setText = (el, text) => {
+  const setText = (el, text) => {
     el.textContent = "";
     const re = /\[([^\]]+)\]\((https:\/\/[^\s)]+)\)|(https:\/\/[^\s<>()]*[^\s<>().,!?;:])/g;
     let last = 0, m;
@@ -282,10 +559,11 @@ footer {
     d.className = "ai-msg " + cls; setText(d, text);
     log.appendChild(d); log.scrollTop = log.scrollHeight; return d;
   };
-  document.getElementById("ai-btn").onclick = () => {
-    box.classList.toggle("open");
-    if (!log.children.length) add("Živjo! Sem Janez, Valentinov AI asistent 🤖. Kako ti lahko pomagam?", "ai-bot");
-    input.focus();
+  btn.onclick = () => {
+    const odprt = box.classList.toggle("open");
+    btn.setAttribute("aria-expanded", odprt);
+    if (!log.children.length) add("Živjo! Sem Janez. Vprašaj me karkoli o Valentinovih projektih.", "ai-bot");
+    if (odprt) input.focus();
   };
   form.onsubmit = async (e) => {
     e.preventDefault();
@@ -293,16 +571,65 @@ footer {
     input.value = ""; add(text, "ai-user");
     history.push({ role: "user", content: text });
     const wait = add("…", "ai-bot");
+    glava.classList.add("razmislja"); document.getElementById("janez-telo").classList.add("razmislja");          // LED utripa, medtem ko Janez razmišlja
     try {
       const r = await fetch(URL_WORKER, {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messages: history.slice(-10) }),
       });
       const d = await r.json();
-      setText(wait, d.reply || d.error || "Napaka.");
+      setText(wait, d.reply || d.error || "Janez trenutno ne more odgovoriti. Poskusi znova čez minuto.");
       if (d.reply) history.push({ role: "assistant", content: d.reply });
-    } catch { wait.textContent = "Povezava ni uspela."; }
+    } catch { wait.textContent = "Povezava z Janezom ni uspela. Preveri internet in poskusi znova."; }
+    glava.classList.remove("razmislja"); document.getElementById("janez-telo").classList.remove("razmislja");
+    log.scrollTop = log.scrollHeight;
   };
+})();
+</script>
+<script>
+// ---------- Janez se sprehaja ob desnem delu dna zaslona ----------
+(() => {
+  const j = document.getElementById("ai-btn"), obl = document.getElementById("janez-oblacek");
+  const oci = j.querySelector(".j-oci"), box = document.getElementById("ai-box");
+  const mirno = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let x = innerWidth - 90, cilj = x, smer = -1, ustavljen = false, pocitek = 60;
+  const meje = () => [Math.max(8, innerWidth - (innerWidth < 700 ? 180 : 320)), innerWidth - 80];
+
+  function novCilj() {
+    const [a, b] = meje();
+    cilj = a + Math.random() * (b - a);
+  }
+  function zanka() {
+    const odprt = box.classList.contains("open");
+    if (odprt) cilj = innerWidth - 80;
+    if (!ustavljen && Math.abs(cilj - x) > 1) {
+      smer = cilj > x ? 1 : -1;
+      x += smer * 0.8;
+      j.classList.add("hodi");
+    } else {
+      j.classList.remove("hodi");
+      if (!ustavljen && !odprt && --pocitek <= 0) { novCilj(); pocitek = 120 + Math.random() * 240; }
+    }
+    const [a, b] = meje(); x = Math.min(Math.max(x, a), b);
+    j.style.transform = `translateX(${x}px)`;
+    j.querySelector("svg").style.transform = `scaleX(${smer})`;
+    obl.style.left = Math.max(8, x - 70) + "px";
+    requestAnimationFrame(zanka);
+  }
+  // oči sledijo miški
+  addEventListener("mousemove", e => {
+    const r = j.getBoundingClientRect();
+    const dx = (e.clientX - (r.left + r.width / 2)) * smer, dy = e.clientY - (r.top + 30);
+    const d = Math.hypot(dx, dy) || 1;
+    oci.style.transform = `translate(${(dx / d * 2.5).toFixed(2)}px, ${(dy / d * 2).toFixed(2)}px)`;
+  });
+  j.addEventListener("mouseenter", () => { ustavljen = true; j.classList.add("maha"); obl.classList.add("vidno"); });
+  j.addEventListener("mouseleave", () => { ustavljen = false; j.classList.remove("maha"); obl.classList.remove("vidno"); });
+  j.addEventListener("click", () => obl.classList.remove("vidno"));
+  addEventListener("resize", novCilj);
+
+  if (mirno) { j.style.transform = `translateX(${innerWidth - 90}px)`; }
+  else { requestAnimationFrame(zanka); setTimeout(() => { obl.classList.add("vidno"); setTimeout(() => obl.classList.remove("vidno"), 2500); }, 1500); }
 })();
 </script>
 </body>

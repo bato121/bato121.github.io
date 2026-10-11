@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    background-color: white;
+    font-family: "Inter", sans-serif;
+    color: #111;
+    line-height: 1.6;
+  }
+
+  .stran {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    mini-height: 100vh;
+	
+	
+  }
+
+.levo {
+position: relative;
+  order: 1;
+  color: #111;
+  padding: 48px 80px 48px 32px;
+  border-right: 1px solid #e5e5e5;
+}
+.levo::before {
+  content: "";
+  position: absolute;
+ inset: 32px;
+  background-image: url("labirint_v.svg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: -1;
+}
+.desno {
+  order: 2;
+  padding: 64px;
+  max-width: 760px;
+}
+
+  h1 {
+    font-size: 2.2rem;
+    margin: 0;
+  }
+
+  .podnaslov {
+    color: #666;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+
+  h2 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #999;
+    margin-top: 32px;
+  }
+
+  .levo h2 {
+  color: #999;
+  margin-top: 100px;
+}
+
+
+  
+
+  h3 {
+    font-size: 0.95rem;
+    margin: 20px 0 8px;
+  }
+
+  .znacke li {
+  background-color: transparent; border: 1px solid #ddd;
+}
+  .znacke li {
+    background-color: #ddd;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+  }
+.levo p {
+  max-width: 40ch;
+}
+
+.desno p {
+  max-width: 60ch;
+}
+  a {
+    color: #111;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+.projekt {
+display: block;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+  color: #111;
+  text-decoration: none;
+  font-weight: normal;
+  transition: 0.2s;
+}
+
+.projekt:hover {
+  border-color: #111;
+  transform: translateY(-2px);
+}
+
+.projekt h3 {
+  margin-top: 0;
+}
+footer {
+  text-align: center;
+  color: #999;
+  font-size: 0.8rem;
+  padding: 24px;
+  border-top: 1px solid #e5e5e5;
+}
+ @media (max-width: 700px) {
+  .stran {
+    grid-template-columns: 1fr;
+  }
+  .desno::before {
+  width: 150px;
+  height: 150px;
+}
+  .desno {
+    order: 2;
+    padding: 32px 16px;
+  }
+  .levo {
+    order: 1;
+    padding: 32px 16px;
+  }
+}
+  .gumb {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 10px 20px;
+  border: 1.5px solid #ddd;
+  border-radius: 10px;
+  color: #111;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.gumb:hover {
+  background-color: #111;
+  color: white;
+  text-decoration: none;
+}
+
+  
+
+</style>
+</head>
+<link rel="icon" href="ikona.svg" type="image/svg+xml">
+<body>
+  <div class="stran">
+  <main class="levo">
+  <h1>Valentin </h1>
+    
+	<p class="podnaslov"> Sem študent računalništva in informatike na VSŠ Nova Gorica.</p>
+    <p>Najraje se učim ob praktičnih projektih: doma imam strežnik s Proxmoxom in kontejnerji, omrežje pa upravljam s pfSense.</p>
+<p>Programiram v C# in modeliram v Fusion 360.</p>
+		
+		<h2>Kontakti</h2>
+		<ul class="povezave">
+		<li><a id="mail" href="#">pokaži e-pošto</a></li>
+		<li><a href="https://github.com/bato121">Github</a></li>
+		<li><a href="https://www.printables.com/@bato_5440178">Printables</a></li>
+</main>
+    <aside class="desno">
+    <h2>Projekti</h2>
+	<h3>Strežnik in omrežje</h3>
+	<div class="projekt">
+	<a href="slike.html#streznik" class="projekt">
+	<h3>Domač strežnik</h3>
+	</a>
+        <ul class="znacke">
+        
+      <li>Linux (Dobro)</li>
+        <li>Proxmox (Osnovno)</li>
+        <li>Podman (Dobro)</li>
+        <li>Pfsense (Doboro)</li>
+      </ul>
+</div>
+<h3>Programiranje</h3>
+<div class="projekt">
+      <ul class="znacke">
+      
+      <li>SQL (osnove)</li>
+      <li>C# (osnove)</li>
+      </ul>
+	  </div>
+      <h3>Ostalo</h3>
+	  <div class="projekt">
+	  <a href="slike.html#dron" class="projekt">
+	  <h3>Dron</h3>
+	  </a>
+          <ul class="znacke">
+       
+          <li>3D modeliranje fusion 360 (Dobro)</li>
+		  <li>3D tisk</li>
+		  <li>Eagle pcb</li>
+        </ul>
+      </aside>
+	  </div>
+	  <footer>© 2026 Valentin</footer>
+	  <script>
+  const ime = "valentin";
+  const domena = "tuta.com";
+  const naslov = ime + "@" + domena;
+  const povezava = document.getElementById("mail");
+  povezava.href = "mailto:" + naslov;
+  povezava.textContent = naslov;
+</script>
+	<!-- AI asistent -->
+<style>
+.ai-msg a{color:inherit;text-decoration:underline}.ai-bot a{color:#2563eb}
+#ai-btn{position:fixed;right:16px;bottom:16px;width:56px;height:56px;border-radius:50%;border:0;background:#2563eb;color:#fff;font-size:24px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.25);z-index:9999}
+#ai-box{position:fixed;right:16px;bottom:84px;width:min(360px,calc(100vw - 32px));height:min(480px,calc(100vh - 120px));display:none;flex-direction:column;background:#fff;color:#111;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.25);overflow:hidden;z-index:9999;font-family:system-ui,sans-serif}
+#ai-box.open{display:flex}
+#ai-head{padding:12px 16px;background:#2563eb;color:#fff;font-weight:600}
+#ai-log{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
+.ai-msg{max-width:85%;padding:8px 12px;border-radius:10px;line-height:1.4;white-space:pre-wrap}
+.ai-user{align-self:flex-end;background:#2563eb;color:#fff}
+.ai-bot{align-self:flex-start;background:#f1f1f1}
+#ai-form{display:flex;border-top:1px solid #ddd}
+#ai-input{flex:1;border:0;padding:12px;font:inherit;outline:none}
+#ai-form button{border:0;background:none;padding:0 16px;color:#2563eb;font-weight:600;cursor:pointer}
+</style>
+<button id="ai-btn" aria-label="Odpri klepet">💬</button>
+<div id="ai-box">
+  <div id="ai-head">Janez - Valentinov asistent</div>
+  <div id="ai-log"></div>
+  <form id="ai-form">
+    <input id="ai-input" placeholder="Napiši sporočilo…" maxlength="1000" autocomplete="off">
+    <button>Pošlji</button>
+  </form>
+</div>
+<script>
+(() => {
+  const URL_WORKER = "https://snowy-sky-82f2.dapt.workers.dev/";
+  const box = document.getElementById("ai-box"), log = document.getElementById("ai-log");
+  const form = document.getElementById("ai-form"), input = document.getElementById("ai-input");
+  const history = [];
+    const setText = (el, text) => {
+    el.textContent = "";
+    const re = /\[([^\]]+)\]\((https:\/\/[^\s)]+)\)|(https:\/\/[^\s<>()]*[^\s<>().,!?;:])/g;
+    let last = 0, m;
+    while ((m = re.exec(text))) {
+      el.append(text.slice(last, m.index));
+      const a = document.createElement("a");
+      a.href = m[2] || m[3];
+      a.textContent = m[1] || m[3];
+      a.target = "_blank"; a.rel = "noopener noreferrer";
+      el.append(a);
+      last = re.lastIndex;
+    }
+    el.append(text.slice(last));
+  };
+  const add = (text, cls) => {
+    const d = document.createElement("div");
+    d.className = "ai-msg " + cls; setText(d, text);
+    log.appendChild(d); log.scrollTop = log.scrollHeight; return d;
+  };
+  document.getElementById("ai-btn").onclick = () => {
+    box.classList.toggle("open");
+    if (!log.children.length) add("Živjo! Sem Janez, Valentinov AI asistent 🤖. Kako ti lahko pomagam?", "ai-bot");
+    input.focus();
+  };
+  form.onsubmit = async (e) => {
+    e.preventDefault();
+    const text = input.value.trim(); if (!text) return;
+    input.value = ""; add(text, "ai-user");
+    history.push({ role: "user", content: text });
+    const wait = add("…", "ai-bot");
+    try {
+      const r = await fetch(URL_WORKER, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: history.slice(-10) }),
+      });
+      const d = await r.json();
+      setText(wait, d.reply || d.error || "Napaka.");
+      if (d.reply) history.push({ role: "assistant", content: d.reply });
+    } catch { wait.textContent = "Povezava ni uspela."; }
+  };
+})();
+</script>
+</body>
+</html>
